@@ -1,70 +1,157 @@
-# Getting Started with Create React App
+## **Project Overview**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Build a simple web application to showcase a professor’s research project by allowing users to interact with a machine learning model using audio input. Users will be able to record audio, submit it to a model hosted on Hugging Face (or a placeholder), and view the model’s prediction and related explanations.
 
-## Available Scripts
+## 
 
-In the project directory, you can run:
+## **Frontend Requirements & UI Design**
 
-### `npm start`
+The frontend will be a **clean, single-page application** designed to showcase the professor’s research interactively. It will guide the user through recording audio, submitting it to a backend model, and viewing predictions in an intuitive and engaging format.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### **Page Layout Overview**
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The application will consist of **three primary sections**:
 
-### `npm test`
+#### **1\.** 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### **Header**
 
-### `npm run build`
+* Displays the **title of the research project**, e.g., **“Interactive Research Demo”**.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* Includes a **concise subtitle** describing the app’s purpose, e.g., *“Explore item purchase likelihood using voice input”*.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* Styled with **clear typography** and a distinct background to differentiate it visually from the rest of the page.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### **2\. Main Content Area (Core user interaction)**
 
-### `npm run eject`
+##### **a. Audio Recording Interface**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+* Prominently positioned **“🎙️ Record Audio” button**.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* On click:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+  * Begins audio recording for up to **10 seconds**.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+  * A **visual timer** is displayed while recording.
 
-## Learn More
+  * A **“Stop” button** allows early termination.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+  * Optionally display recording status (e.g., waveform animation or blinking mic icon).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    ##### **b.** 
 
-### Code Splitting
+    ##### **Audio Playback & Confirmation**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+* Once recording is stopped:
 
-### Analyzing the Bundle Size
+  * Display an **audio playback widget** for review.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+  * Show a **“Submit” button** to allow the user to send the audio to the backend.
 
-### Making a Progressive Web App
+  * Disable submit button until valid audio is available.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+    ##### **c.** 
 
-### Advanced Configuration
+    ##### **Prediction Results Display**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+* After backend returns a response, display:
 
-### Deployment
+  * **Item Purchase Likelihood Score** — a numerical prediction (e.g., “73% likely”).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+  * **Confidence Score** (if provided by the model).
 
-### `npm run build` fails to minify
+  * **Explanatory Features** (based on mock or model output), such as:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    * Detected tone or speech patterns
+
+    * Important keywords or phrases
+
+    * Model rationale (e.g., “Keyword ‘buy’ detected”)
+
+* Present results in a **visually digestible format**, such as:
+
+  * Cards with labels and values
+
+  * Bullet point explanations
+
+  * Charts or progress bars for likelihood/confidence
+
+    #### **3\.** 
+
+    #### **Footer**
+
+* Brief attribution of the research and professor’s name.
+
+* Optional links to:
+
+  * Related research paper or lab site
+
+  * Feedback or contact form
+
+* Styled subtly to maintain user focus on core content.
+
+##  **Backend Requirements**
+
+### **1\.** 
+
+### **Audio Handling**
+
+* Set up an API endpoint: POST /predict
+
+* Accept audio data in **WAV or MP3 format** via multipart/form-data.
+
+* Save uploaded audio temporarily for processing (or keep in memory).
+
+### **2\.** 
+
+### **Model Placeholder Integration**
+
+* In place of a real model, create a **mock function**:
+
+def run\_model\_on\_audio(audio\_file):  
+    return {  
+        "purchase\_likelihood": 0.73,  
+        "confidence": 0.85,  
+        "explanations": \["Voice pitch suggests interest", "Keyword 'buy' detected"\]  
+    }
+
+* Clearly comment the placeholder function to indicate where to integrate the Hugging Face API later.
+
+* Structure backend so you can **swap in a Hugging Face inference API call** in one place (e.g., in the above function).
+
+### **3\.** 
+
+### **Future Model Integration (Design Now)**
+
+* Use requests or httpx to structure a call to Hugging Face Inference API like:
+
+response \= requests.post(  
+    "https://api-inference.huggingface.co/models/your-model-id",  
+    headers={"Authorization": f"Bearer {HF\_API\_TOKEN}"},  
+    data=audio\_bytes  
+)
+
+### **4\.** 
+
+### **Response Format**
+
+* Return a JSON response to the frontend:
+
+{  
+  "purchase\_likelihood": 0.73,  
+  "confidence": 0.85,  
+  "explanations": \["Voice pitch suggests interest", "Keyword 'buy' detected"\]  
+}
+
+## **Frontend-Backend Interaction Flow**
+
+1. User records audio in browser.
+
+2. Audio is previewed and submitted to backend via POST /predict.
+
+3. Backend runs mock model (or real model in future) on audio.
+
+4. Backend sends JSON response to frontend.
+
+5. Frontend displays prediction and explanations.
+
