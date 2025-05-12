@@ -1,0 +1,32 @@
+.prediction-results {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.prediction-results h3 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.prediction-results p {
+  margin: 5px 0;
+  color: #666;
+}
+
+.prediction-results h4 {
+  margin-top: 15px;
+  color: #333;
+}
+
+.prediction-results ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.prediction-results li {
+  margin: 5px 0;
+  color: #666;
+} 
