@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)  # This will enable CORS for all routes
+CORS(app, origins=["https://voice-marketing-frontend.vercel.app"])  # Restrict CORS to production frontend
 
 @app.route("/api/example", methods=["GET"])
 def example():

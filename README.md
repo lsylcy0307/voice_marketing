@@ -155,3 +155,5 @@ response \= requests.post(
 
 5. Frontend displays prediction and explanations.
 
+
+Backend deployment url: voice-marketing-backend-k4990o1m4-lsylcy0307s-projects.vercel.app

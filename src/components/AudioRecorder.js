@@ -58,10 +58,11 @@ const AudioRecorder = () => {
       const formData = new FormData();
       formData.append('audio', new Blob(audioChunksRef.current, { type: 'audio/wav' }), 'recording.wav');
       
-      const response = await fetch('http://localhost:5001/api/predict', {
+      const response = await fetch('http://voice-marketing-backend-one.vercel.app/api/predict', {
         method: 'POST',
         body: formData,
       });
+      
       const data = await response.json();
       console.log(data);
       setPrediction(data);
