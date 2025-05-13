@@ -55,9 +55,12 @@ const AudioRecorder = () => {
     if (!audioUrl) return;
     setIsSubmitting(true);
     try {
-      const response = await fetch('http://localhost:5000/predict', {
+      const formData = new FormData();
+      formData.append('audio', new Blob(audioChunksRef.current, { type: 'audio/wav' }), 'recording.wav');
+      
+      const response = await fetch('http://localhost:5001/api/predict', {
         method: 'POST',
-        body: new Blob(audioChunksRef.current, { type: 'audio/wav' }),
+        body: formData,
       });
       const data = await response.json();
       console.log(data);
